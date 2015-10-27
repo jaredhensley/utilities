@@ -17,42 +17,69 @@ var _ = {};
   // return just the first element.
   _.first = function (array, n) {
     var newarry = [];
+
     if (!n) {
       return array[0];
     }
+
     if (n > array.length) {
       n = array.length;
     }
+
     for (var i = 0; i < n; i++) {
       newarry.push(array[i]);
     }
+
     return newarry;
+
   };
 
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function (array, n) {
+
     var newArr = [];
+
     if (!n) {
       return array[array.length - 1];
     }
+
     if (n > array.length) {
       n = array.length;
     }
+
     for (var i = array.length - 1; i >= array.length - n; i--) {
       newArr.unshift(array[i]);
     }
+
     return newArr;
 
   };
 
   // Call iterator(value, key, collection) for each element of collection.
   // Accepts both arrays and objects.
-  _.each = function (collection, iterator) {};
+  _.each = function (collection, iterator) {
+    for (var key in collection) {
+      iterator(collection[key], key, collection);
+    }
+
+  };
 
   // Returns the index at which value can be found in the array, or -1 if value
   // is not present in the array.
-  _.indexOf = function (array, target) {};
+  _.indexOf = function (array, target) {
+    if (!array) {
+      return -1;
+    }
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] === target) {
+        return i;
+      } else {
+        return -1;
+      }
+    }
+
+  };
 
   // Return all elements of an array that pass a truth test.
   _.filter = function (collection, iterator) {};
@@ -62,7 +89,6 @@ var _ = {};
 
   // Produce a duplicate-free version of the array.
   _.uniq = function (array) {};
-
 
   // Return the results of applying an iterator to each element.
   _.map = function (array, iterator) {};
@@ -91,7 +117,7 @@ var _ = {};
   // provided, provide a default one
   _.some = function (collection, iterator) {};
 
-
+  //GOAL END OF WEEK 2
   /**
    * OBJECTS
    * =======
