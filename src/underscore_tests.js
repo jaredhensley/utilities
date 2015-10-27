@@ -59,6 +59,7 @@ var _ = {};
   // Call iterator(value, key, collection) for each element of collection.
   // Accepts both arrays and objects.
   _.each = function (collection, iterator) {
+
     for (var key in collection) {
       iterator(collection[key], key, collection);
     }
@@ -71,32 +72,71 @@ var _ = {};
     if (!array) {
       return -1;
     }
+
     for (var i = 0; i < array.length; i++) {
       if (array[i] === target) {
         return i;
-      } else {
-        return -1;
       }
     }
-
+    return -1;
   };
 
   // Return all elements of an array that pass a truth test.
-  _.filter = function (collection, iterator) {};
+  _.filter = function (collection, iterator) {
+
+    var newArr = [];
+
+    collection.forEach(function (value, index) {
+
+      if (iterator(value)) {
+        newArr.push(value);
+      }
+
+    });
+
+
+    return newArr;
+  };
 
   // Return all elements of an array that don't pass a truth test.
-  _.reject = function (collection, iterator) {};
+  _.reject = function (collection, iterator) {
+    var newArr = [];
+    collection.forEach(function (value, index) {
+      if (!iterator(value)) {
+        newArr.push(value);
+      }
+    });
+    return newArr;
+
+  };
 
   // Produce a duplicate-free version of the array.
-  _.uniq = function (array) {};
+  _.uniq = function (array) {
+
+  };
 
   // Return the results of applying an iterator to each element.
-  _.map = function (array, iterator) {};
+  _.map = function (array, iterator) {
+    var newArr = [];
+    array.forEach(function (value, index) {
+      newArr.push(iterator(value));
+    });
+    return newArr;
+  };
 
   // Takes an array of objects and returns and array of the values of
   // a certain property in it. E.g. take an array of people and return
   // an array of just their ages
-  _.pluck = function (array, propertyName) {};
+
+  _.pluck = function (array, propertyName) {
+    var newArr = [];
+    array.forEach(function (value, index) {
+      if (value.hasOwnProperty(propertyName)) {
+        newArr.push(value[propertyName]);
+      }
+    });
+    return newArr;
+  };
 
   // Calls the method named by methodName on each value in the list.
   _.invoke = function (list, methodName, args) {};
