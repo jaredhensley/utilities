@@ -138,16 +138,58 @@ var _ = {};
     return newArr;
   };
 
+  /*JASON SOLUTION FOR PLUCK
+    _.pluck = function(array, propertyName) {
+    return array.map(function(val){
+      return val[propertyName];
+    });
+  };
+  */
+
   // Calls the method named by methodName on each value in the list.
-  _.invoke = function (list, methodName, args) {};
+
+  // 10 27 15 -- go back and do this with .map 
+  _.invoke = function (list, methodName, args) {
+    var newArr = [];
+    if (typeof methodName === 'string') {
+      list.forEach(function (value, index) {
+        newArr.push(value[methodName](args));
+      });
+    } else {
+      list.forEach(function (value, index) {
+        newArr.push(methodName.apply(value, args));
+      });
+    }
+
+    return newArr;
+
+  };
 
   // Reduces an array or object to a single value by repetitively calling
   // iterator(previousValue, item) for each item. previousValue should be
   // the return value of the previous iterator call.
-  _.reduce = function (collection, iterator, initialValue) {};
+  _.reduce = function (collection, iterator, initialValue) {
+
+
+  };
 
   // Determine if the array or object contains a given value (using `===`).
-  _.contains = function (collection, target) {};
+  _.contains = function (collection, target) {
+    if (Array.isArray(collection)) {
+      for (var i = 0; i < collection.length; i++) {
+        if (collection[i] === target) {
+          return true;
+        }
+      }
+    } else if (!Array.isArray(collection)) {
+      for (var prop in collection) {
+        if (collection[prop] === target) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
 
 
   // Determine whether all of the elements match a truth test.
