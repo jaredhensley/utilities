@@ -113,6 +113,13 @@ var _ = {};
   // Produce a duplicate-free version of the array.
   _.uniq = function (array) {
 
+    var check = {};
+    var newArr = array.filter(function (value) {
+      return check.hasOwnProperty(value) ? false : check[value] = true;
+    });
+
+    return newArr;
+
   };
 
   // Return the results of applying an iterator to each element.
@@ -193,13 +200,47 @@ var _ = {};
 
 
   // Determine whether all of the elements match a truth test.
-  _.every = function (collection, iterator) {};
+  _.every = function (collection, iterator) {
+
+    iterator = iterator || returnValue;
+
+    function returnValue(i) {
+      return i;
+    };
+
+    if (collection.length === 0) {
+      return true;
+    }
+
+    for (var i = 0; i < collection.length; i++) {
+      if (!(iterator(collection[i]))) {
+        return false;
+      }
+    }
+    return true;
+  };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
-  _.some = function (collection, iterator) {};
+  _.some = function (collection, iterator) {
+    iterator = iterator || function (i) {
+      return i;
+    };
 
-  //GOAL END OF WEEK 2
+    if (collection.length === 0) {
+      return false;
+    }
+
+    for (var i = 0; i < collection.length; i++) {
+      if (iterator(collection[i])) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  //GOAL END OF WEEK 2  -- HAHA FINISHED ON 10 28 15
   /**
    * OBJECTS
    * =======
